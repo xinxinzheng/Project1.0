@@ -7,6 +7,9 @@
 		jshint:{
 			files:['Gruntfile.js','js/*.js'],
 		},
+        csslint:{
+            files:['public/stylesheet/*.css'],
+        },
 		
         concat: {
             options: {
@@ -21,21 +24,26 @@
             },
     		js: {
       			src: [
-                    'js/config/*.js',
-                    'js/controller/*.js'
+                    'public/js/config/*.js',
+                    'public/js/controller/*.js'
                 ],
-      			dest: 'js/index.js',
+      			dest: 'public/js/index.js',
     		},
   		},
 
         watch: {
             js: {
-                files: ['js/*/*.js','Gruntfile.js'],
+                files: ['public/js/*/*.js','Gruntfile.js'],
                 tasks: ['concat:js','jshint'],
             },
             html: {
                 files: ['temp/*.html'],
+                tasks:['concat:js']
             },
+            css:{
+                files:['public/stylesheet/*.css'],
+                tasks:['csslint']
+            }
         },
 
   		connect: {
@@ -49,11 +57,10 @@
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-connect');
-
+    grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.registerTask('default',['connect','concat','watch']);
 
     

@@ -5,3 +5,72 @@
  * @date    2017-03-23 13:54:06
  * @version $Id$
  */
+html,body{		
+	height:100%;
+	position: relative;
+	display: flex;
+	width:100%;
+}
+* {  
+	font-size: 14px;
+	margin:0px;
+	padding:0px;
+	font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+/*****左侧菜单*****/
+.sidebar{
+	width:200px;
+	height:100%;
+	background: #0099CC;
+}
+.sidebar ul{
+	width:100%;
+} 
+.sidebar ul li{
+	text-align: center;
+	list-style: none;
+	line-height: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+.sidebar ul li:hover{
+	background: rgba(255,255,255,.7);
+}
+/*********左侧菜单结束***********/
+/******监控 Tab*******/
+.content{
+	width:100%;
+}
+.monitor{
+	height:100%;
+	width:100%;
+}
+.monitor .monitor-tag{
+	height:50px;
+	margin: 20px auto 50px auto ;
+}
+.monitor .monitor-tag ul{
+	width:100%;
+	padding:0px 20px;
+}
+.monitor ul li{
+	display: inline-block;
+	margin-right:20px;
+}
+.monitor ul li>a{
+	display: inline-block;
+	line-height: 50px;
+	padding:0px 40px;
+	border:1px solid rgba(0,0,0,.2);
+	border-radius:5px 5px 0px 0px;
+	box-shadow:0 0 2px 0 rgba(0,0,0,.2);
+	cursor:pointer;
+}
+.monitor ul li>a:hover , .monitor ul li>a:focus{
+	box-shadow: 0 0 2px 0 #0099CC;
+}
+
+.monitor ul li.active >a{
+	background: #99CCFF;
+}
+/******监控 Tab结束*******/
