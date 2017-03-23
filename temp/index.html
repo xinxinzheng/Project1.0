@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>小透明</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/css/index.css">
+  <link rel="stylesheet" href="static/module/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/module/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/module/bootstrap-markdown/css/bootstrap-markdown.min.css">
+  <link rel="stylesheet" href="static/module/highlight/github.min.css">
+  <link rel="stylesheet" href="static/module/angular-markdown-editor/styles/angular-markdown-editor.css">
+  <script type="text/javascript" src="static/module/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="static/module/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="static/module/angularjs/angular.min.js"></script>
+  <script type="text/javascript" src="static/module/angularjs/angular-ui-route.min.js"></script>
+  <script type="text/javascript" src="static/module/angularjs/angular-messages.min.js"></script>
+  <script type="text/javascript" src="static/module/angular-sanitize/angular-sanitize.min.js"></script>
+  <script type="text/javascript" src="static/module/marked/lib/marked.js"></script>
+  <script type="text/javascript" src="static/module/angular-marked/dist/angular-marked.min.js"></script>
+  <script type="text/javascript" src="static/module/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+  <script type="text/javascript" src="static/module/highlight/highlight.min.js"></script>
+  <script type="text/javascript" src="static/module/angular-highlightjs/src/angular-highlightjs.js"></script>
+  <script type="text/javascript" src="static/module/bootstrap-markdown/locale/bootstrap-markdown.fr.js"></script>
+  <script type="text/javascript" src="static/module/angular-markdown-editor/src/angular-markdown-editor.js"></script>
+</head>
+
+  <body ng-controller="CommonCtrl">
+    <div ng-include="'/common/header.html'" ></div>
+    <div ui-view></div>
+    <div ng-include="'/common/footer.html'" ></div>
+    <script type="text/javascript" src="static/js/all.js"></script>
+  </body>
+</html>
