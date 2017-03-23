@@ -1,0 +1,4 @@
+节点信息：
+http://192.168.46.128:8181/restconf/operational/opendaylight-inventory:nodes/
+拓扑信息：
+http://192.168.46.128:8181/restconf/operational/network-topology:network-topology/
