@@ -7,11 +7,6 @@
 		jshint:{
 			files:['Gruntfile.js','js/*.js'],
 		},
-
-		csslint:{
-			options:{},
-			files:['stylesheet/*.css'],
-		},
 		
         concat: {
             options: {

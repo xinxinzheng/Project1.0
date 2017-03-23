@@ -1,15 +1,14 @@
 {
-  "name": "cc",
+  "name": "bm-web",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm install && grunt",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "zhengxinxin",
   "license": "ISC",
   "devDependencies": {
-    "connect": "^3.6.0",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-concat": "^1.0.1",
