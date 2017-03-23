@@ -26,7 +26,8 @@
             },
     		js: {
       			src: [
-                    ,'js/controller/*.js'
+                    'js/config/*.js',
+                    'js/controller/*.js'
                 ],
       			dest: 'js/index.js',
     		},
@@ -46,7 +47,7 @@
             dev: {
                 options: {
                     port: 8081,
-                    base: ['js','temp','node_modules']
+                    base: ['public','temp']
                 }
             },
         },
