@@ -24,7 +24,7 @@ $scope.initChartslink = function(){
 						var x = (new Date()).getTime(),         
 							y = Math.random();                                  
 						series.addPoint([x, y], true, true);   
-						serics1.addPoint([x, y], true, true);                  
+						// serics1.addPoint([x, y], true, true);                  
 					}, 1000);                                                   
 				}                                                               
 			},
@@ -62,22 +62,6 @@ $scope.initChartslink = function(){
 			enabled: true                                                      
 		},                                                                      
 		series: [{                                                              
-			name: 'Random data',                                                
-			data: (function() {                                                 
-				// generate an array of random data                             
-				var data = [],                                                  
-					time = (new Date()).getTime(),                              
-					i;                                                          
-																				
-				for (i = -19; i <= 0; i++) {                                    
-					data.push({                                                 
-						x: time + i * 1000,                                     
-						y: Math.random()                                        
-					});                                                         
-				}                                                               
-				return data;                                                    
-			})()                                                                
-		},{                                                              
 			name: 'Random data',                                                
 			data: (function() {                                                 
 				// generate an array of random data                             
