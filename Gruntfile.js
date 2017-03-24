@@ -7,9 +7,9 @@
 		jshint:{
 			files:['Gruntfile.js','js/*.js'],
 		},
-        csslint:{
-            files:['public/stylesheet/*.css'],
-        },
+        // csslint:{
+        //     files:['public/stylesheet/*.css'],
+        // },
 		
         concat: {
             options: {
@@ -42,7 +42,7 @@
             },
             css:{
                 files:['public/stylesheet/*.css'],
-                tasks:['csslint']
+                // tasks:['csslint']
             }
         },
 

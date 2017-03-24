@@ -13,23 +13,30 @@
  .controller('monitorCtrl',function($rootScope,$scope,$state){
  	$scope.$state = $state;
  })
+ .controller('sidebarCtrl',function($rootScope,$scope,$state){
+ 	$scope.$state = $state;
+ })
  .controller('chartsCtrl',function($rootScope,$scope){
  	$scope.hasLink = true;
  })
 .config(function($stateProvider,$urlRouterProvider){
-    $urlRouterProvider.otherwise("/monitor/datacharts");
+    $urlRouterProvider.otherwise("/monitor/data/charts");
     $stateProvider
     .state("monitor",{
         url:"/monitor",
         templateUrl:"/monitor.html",
     })
-    .state('monitor.datacharts', {
-            url: '/datacharts',
+    .state('monitor.data',{
+    	url: '/data',
+        template: '<div ui-view></div>',
+    })
+    .state('monitor.data.charts', {
+            url: '/charts',
             templateUrl: 'datacharts.html',
     })
-    .state('monitor.datalist', {
-            url: '/datalist',
-            templateUrl: 'datalist',
+    .state('monitor.data.list', {
+            url: '/list',
+            templateUrl: 'datalist.html',
     })        
  
 })

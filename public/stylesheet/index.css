@@ -21,7 +21,7 @@ html,body{
 .sidebar{
 	width:200px;
 	height:100%;
-	background: #0099CC;
+	background: rgba(54,105,201,1);
 }
 .sidebar ul{
 	width:100%;
@@ -33,13 +33,15 @@ html,body{
 	height: 50px;
 	cursor: pointer;
 }
-.sidebar ul li:hover{
-	background: rgba(255,255,255,.7);
+.sidebar ul li.active , .sidebar ul li:hover{
+	background: rgba(54,154,201,1);
 }
+
 /*********左侧菜单结束***********/
 /******监控 Tab*******/
 .content{
 	width:100%;
+	background: rgba(54,154,201,1);
 }
 .monitor{
 	height:100%;
@@ -56,21 +58,43 @@ html,body{
 .monitor ul li{
 	display: inline-block;
 	margin-right:20px;
+	background: white;
+	border-radius:5px 5px 0px 0px;
 }
 .monitor ul li>a{
 	display: inline-block;
 	line-height: 50px;
 	padding:0px 40px;
-	border:1px solid rgba(0,0,0,.2);
-	border-radius:5px 5px 0px 0px;
+	border:1px solid rgba(0,0,0,.2);	
 	box-shadow:0 0 2px 0 rgba(0,0,0,.2);
 	cursor:pointer;
+	text-decoration: none;
+	color:#274b6d;
+	border-radius:5px 5px 0px 0px;
 }
 .monitor ul li>a:hover , .monitor ul li>a:focus{
 	box-shadow: 0 0 2px 0 #0099CC;
 }
 
 .monitor ul li.active >a{
-	background: #99CCFF;
+	background: rgba(218,226,228,1);
 }
 /******监控 Tab结束*******/
+/******折线图******/
+.chartslist{
+	width:80%;
+	margin:20px auto;
+	background: rgba(104,153,153,1);
+}
+.chartslist p{
+	font-size:16px;
+	padding:10px 20px;
+	font-weight: 600;
+	color:white;
+	background: rgba(0,0,0,.3);
+	border-radius:5px 5px 0 0 ;
+}
+.chartslist .highcharts-container{
+	margin:10px auto;
+}
+/******折线图***/
