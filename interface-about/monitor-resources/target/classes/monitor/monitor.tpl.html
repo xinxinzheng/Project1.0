@@ -1,0 +1,40 @@
+<!-- This is the landing page of you application, Update the content as per your requirements -->
+
+<!-- This is the landing page of you application, Update the content as per your requirements -->
+
+<div>
+    
+	<!--<div style="margin-left:100px; height:50px;">-->
+		<!--<h4 style="font-size:30px;color:black">选择链路</h4>-->
+        <div style="margin-left:50px;height:50px">
+                <h3>选择链路</h3>
+	</div>
+	<div  style="margin-left:50px;float:left;height:150px;">
+	        <p style="font-size:15px">源节点</p>
+		<select ng-model="selectedPort.src" ng-options="x for x in mySwitch" ng-change="findPort()"></select>
+	</div>
+	<div  style="margin-left:50px;float:left;height:150px;">
+		<p style="font-size:15px">目的节点</p>
+		<select ng-model="selectedPort.dst"  ng-options="x for x in myDst"></select>
+	</div>
+	<div style="clear:both;">s={{selectedPort.src}},d={{selectedPort.dst}},myDst={{myDst}}</div>
+
+	<!--<div style="margin-left:100px;clear:both;">-->
+         <div>
+		<!--<h4 style="font-size:30px;color:black">监控选项</h4>-->
+                <h3>监控选项</h3>
+		<form>
+			<input type="radio" checked="checked" ng-model="secl" name="111" value="0"/>丢包率<br />
+			<input type="radio" name="111" ng-model="secl" value="1" />延迟<br />
+			<input type="radio" name="111" ng-model="secl" value="2" />链路速率<br />
+		</form>
+	</div>
+	<button ng-click="startMonitor(secl)">开始</button>
+
+<!--<p>myLink={{myLink}}</p>-->
+
+<!--<p>链路速率:{{bdw}}</p>
+<p>丢包率:{{lossrate}}</p>-->
+	
+	
+</div>

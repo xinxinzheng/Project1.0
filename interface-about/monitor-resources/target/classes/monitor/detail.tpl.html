@@ -1,0 +1,17 @@
+<!--<body onbeforeunload={{cancelInterval()}}>-->
+<div>
+<h4>Data   updated: {{updated}}</h4>
+<h4>Data2 updated2:{{updated2}}</h4>
+	<p>selectedPort={{selectedPort}}</p>
+<!--<p>{{selectedPort.src}}</p>-->	
+<p ng-hide="selectedPort.monitor!=2">链路速率:<input type="text" ng-model="bdw">Mbit/s</p>
+<p ng-hide="selectedPort.monitor!=0">丢包率:<input type="text" ng-model="lossrate">%</p>
+<!--<p>带  宽:<input type="text" ng-model="bdw"></p>
+<p>丢包率:<input type="text" ng-model="lossrate"></p>-->
+<p>链路速率:{{bdw}}</p>
+<p>丢包率:{{lossrate}}</p>
+
+</div>
+</body>
+
+
