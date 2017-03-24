@@ -22,19 +22,27 @@
 .config(function($stateProvider,$urlRouterProvider){
     $urlRouterProvider.otherwise("/monitor/data/charts");
     $stateProvider
-    .state("monitor",{
-        url:"/monitor",
-        templateUrl:"/monitor.html",
+    .state('monitor', {
+            url: '/monitor',
+            template: '<div ui-view></div>',
     })
     .state('monitor.data',{
     	url: '/data',
         template: '<div ui-view></div>',
     })
-    .state('monitor.data.charts', {
+    .state("monitor.data.conf",{
+        url:"/conf",
+        templateUrl:"/startMonitor.html",
+    })
+    .state('monitor.data.overview',{
+    	url: '/overview',
+        templateUrl: 'monitor.html',
+    })
+    .state('monitor.data.overview.charts', {
             url: '/charts',
             templateUrl: 'datacharts.html',
     })
-    .state('monitor.data.list', {
+    .state('monitor.data.overview.list', {
             url: '/list',
             templateUrl: 'datalist.html',
     })        
