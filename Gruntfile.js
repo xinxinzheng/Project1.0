@@ -45,7 +45,22 @@
                 // tasks:['csslint']
             }
         },
-
+        copy: {
+            main: {
+                files: [{
+                    expand: true,
+                    cwd: 'public/',
+                    src: ['**'],
+                    dest: 'build/'
+                },{
+                    expand: true,
+                    cwd: 'temp/',
+                    src: ['**'],
+                    dest: 'build'
+                }]
+            }
+        },
+        clean: ['build'],
   		connect: {
             dev: {
                 options: {
