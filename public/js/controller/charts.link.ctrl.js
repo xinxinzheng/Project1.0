@@ -35,7 +35,7 @@ $scope.produceCharts = function(){
 	$scope.conf.link.map(function(_item,_i){
 		var data = [], time = (new Date()).getTime();  
 		for(var i = -19 ; i < 0 ; i++){
-			data.push({x: time + i * 5000,y: Math.random()})
+			data.push({x: time + i * 5000,y: 0})
 		}                                                        																				                                                                                                                                                    
 		var chart = {                                                              
 			name: _item.src + ' ' + _item.desc ,                                                
