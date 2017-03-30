@@ -20,7 +20,7 @@
  	$scope.hasLink = true;
  })
 .config(function($stateProvider,$urlRouterProvider){
-    $urlRouterProvider.otherwise("/monitor/data/charts");
+    $urlRouterProvider.otherwise("/monitor/data/conf");
     $stateProvider
     .state('monitor', {
             url: '/monitor',
