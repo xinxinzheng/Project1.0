@@ -8,25 +8,25 @@
 
 define(['app/monitor/monitor.module','app/monitor/monitor.services'], function(s) {
 
-  s.controller('rootMonitorCtrl', function($rootScope) {
-    $rootScope['section_logo'] = 'assets/images/logo_monitor.jpg';
-   // $rootScope.$apply();
-  });
+  // s.controller('rootMonitorCtrl', function($rootScope) {
+  //   $rootScope['section_logo'] = 'assets/images/logo_monitor.jpg';
+  //  // $rootScope.$apply();
+  // });
 
   s.controller('MonitorCtrl', function($scope, $state,MonitorInventorySvc, $timeout) {
     MonitorInventorySvc.getAllNodes().then(function(data) {
       $scope.data = data['0']['topology'][0];
-$scope.myNode=$scope.data['node'];
-$scope.mySwitch=[];//save the switches
-$scope.myLink=$scope.data['link'];//save the links of switches
-var lenNode=$scope.myNode.length;
-for(var i=0;i<lenNode;i++)
-{
-var obj=$scope.myNode[i];
-var nodeId=obj['node-id'];
-if(nodeId.indexOf('openflow') >= 0)
-{$scope.mySwitch.push(nodeId);}
-}//end for lenNode
+      $scope.myNode=$scope.data['node'];
+      $scope.mySwitch=[];//save the switches
+      $scope.myLink=$scope.data['link'];//save the links of switches
+      var lenNode=$scope.myNode.length;
+      for(var i=0;i<lenNode;i++)
+      {
+      var obj=$scope.myNode[i];
+      var nodeId=obj['node-id'];
+      if(nodeId.indexOf('openflow') >= 0)
+      {$scope.mySwitch.push(nodeId);}
+      }//end for lenNode
 
 
 
@@ -90,36 +90,12 @@ if(nodeId.indexOf('openflow') >= 0)
 
       $scope.updated = 0;
       $scope.updated2= 0;
-/*     function up_dt() {
-            LinkInventorySvc.getAllNodes().then(function(data) {
-                $scope.data=data[0].node;
-               });
-
-            }      
-    
-      for (var i=0;i<1000;i++){
-
-               up_dt();
-
-
-             $timeout(t_out(),5000);
-       }*/
-
       $scope.$watch('data', function() {
         $scope.updated++;
        });
      $scope.$watch('data2', function() {
         $scope.updated2++;
        });
-
-     /* function t_out(){
-               LinkInventorySvc.getAllNodes().then(function(data) {
-               $scope.data2=data[0].node;
-                $scope.bwfun();
-              $scope.lossRate.figlossRate($scope.selectedPort.src,$scope.selectedPort.dst);
-
-                });
-            }*/
 
           $interval(function () {
 
