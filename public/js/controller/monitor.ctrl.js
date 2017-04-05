@@ -15,6 +15,7 @@ app.controller('monitorCtrl', function($rootScope,$scope,$http){
 		})
 	}
 	$scope.getAllNode();//获取所有节点数据	
+
 	/*****找到单个节点的bytes与packets信息****/
 	$scope.findNodeInfo = function(nodeName){
 		var node = {name:nodeName};
@@ -40,6 +41,18 @@ app.controller('monitorCtrl', function($rootScope,$scope,$http){
 			link.push({src:_item.src,dest:_item.dest,src_bytes:src.bytes,src_packets:src.packets,dest_bytes:dest.bytes,dest_packets:dest.packets});
 		})
 		return link;
+	}
+	/****计算链路速率***/
+	$scope.linkRate = function(){
+
+	}
+	/****计算丢包率***/
+	$scope.lossPacketsRate = function(){
+
+	}
+	/****计算时延***/
+	$scope.linkTimeOut = function(){
+
 	}
 
 	/****开始监控****/
