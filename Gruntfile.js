@@ -5,12 +5,9 @@
 		pkg : grunt.file.readJSON('package.json'),
 
 		jshint:{
-			files:['Gruntfile.js','js/*.js'],
+			// files:['Gruntfile.js','public/js/controller/*.js','public/js/config/*.js'],
 		},
-        // csslint:{
-        //     files:['public/stylesheet/*.css'],
-        // },
-		
+
         concat: {
             options: {
                 process: function(src, filepath) {

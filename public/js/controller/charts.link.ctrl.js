@@ -5,14 +5,14 @@
  * @version $Id$
  */
 "use strict";
-app.controller('chartlinkCtrl',function($rootScope,$scope){
+app.controller('chartlinkCtrl',function($rootScope,$scope,$interval){
 $scope.conf = {};
 $scope.getData = function(){
 	$http({
 		url:'nodes.json',
 		type:'GET'
-	})
-}
+	});
+};
 $scope.conf.link = [
 {'src':'openflow:1','desc':'openflow:2 '},
 {'src':'openflow:1','desc':'openflow:3 '},
@@ -29,7 +29,7 @@ $scope.getLinkSpeed = function(){
 		}, 1);
 	})
 
-}
+};
 $scope.produceCharts = function(){
 	var charts = [];
 	$scope.conf.link.map(function(_item,_i){
@@ -42,9 +42,9 @@ $scope.produceCharts = function(){
 			data: data                                                               
 		};
 		charts.push(chart);
-	});console.log(charts);
+	});
 	return charts;
-}
+};
 $scope.initChartslink = function(){
 	Highcharts.setOptions({                                                     
 		global: {                                                               
@@ -59,7 +59,7 @@ $scope.initChartslink = function(){
 				load: function() {                                              																				            
 					var series = this.series;                                
 					series.map(function(_item,_i){
-						setInterval(function() {                                    
+						$interval(function() {                                    
 							var x = (new Date()).getTime(),         
 								y = Math.random();                                  
 							_item.addPoint([x, y], true, true);                  
