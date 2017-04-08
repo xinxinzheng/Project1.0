@@ -31,7 +31,7 @@
         watch: {
             js: {
                 files: ['public/js/*/*.js','Gruntfile.js'],
-                tasks: ['concat:js','jshint'],
+                tasks: ['concat:js'],
             },
             html: {
                 files: ['temp/*.html'],

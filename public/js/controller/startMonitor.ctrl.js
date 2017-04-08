@@ -1,32 +1,29 @@
 "use strict";
-app.controller("startMonitorCtrl", function ($scope, $http) {
-    $scope.topologyData = null;
-    $scope.linkType = "single";
-    $scope.allLinkArr = [];
-    $scope.chooseLinkArr = [];
-    $scope.moreParas = false;
-    $scope.tipsArr = null;
+app.controller("startMonitorCtrl", function ($scope, $http,$state) {
+    $scope.topologyData = null;//链路数据信息
+    $scope.allLinkArr = [];//所有链路
+    $scope.chooseLinkArr = [];//选中的链路
+    $scope.moreParas = false;//是否展开更多参数
+    $scope.tips = "请选择监控参数";
+    $scope.linktips = "请选择监控链路";
+    $scope.monitorParas = {speed:false,loss:false,delay:false};
 
-    //拓扑数据请求接口
-    $scope.getSourceNode = function () {
+    // 拓扑数据请求接口
+    $scope.getSourceNode = function(){
         $http({
-            method: "get",
-            url: "topology.json"
-        }).then(function successFun(res) {
-            if (!res.data["network-topology"].topology[0].link) {
+            method: "GET",
+            url: "../../data/topology.json"
+        }).success(function(res){
+            if (!res["network-topology"].topology[0].link) {
+            	$scope.linktips = "没有链路信息，请确保数据正常";
                 return;
             }
-            $scope.topologyData = $scope.filterData(res.data["network-topology"].topology[0].link);
-        }, function errorFun(res) {
-            console.log(res);
-        });
+            $scope.topologyData = $scope.filterData(res["network-topology"].topology[0].link);
+        })
     };
 
-    //提取有效数据
+    // //提取有效数据
     $scope.filterData = function (data) {
-        if (!data) {
-            return;
-        }
         var des, source;
         var reg = /^openflow:/;
         var nodeArr = {};
@@ -54,20 +51,12 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
         $scope.chooseLinkArr = [];
     });
 
-    //选择链路按钮处理事件
+    // //选择链路按钮处理事件
     $scope.confirmLink = function () {
         if ($scope.linkType == "all") {
-            $scope.showTips("link", "");
-            $scope.allLinkArr.map(function (item) {
-                $scope.chooseLinkArr.push(item);
-            });
+            $scope.chooseLinkArr = $scope.allLinkArr;
             return;
         }
-        if (!$scope.sourceData || !$scope.desValue) {
-            $scope.showTips("link", "请选择链路节点");
-            return;
-        }
-
         var item = $scope.sourceData.first + " " + $scope.desValue;
         if ($.inArray(item, $scope.chooseLinkArr) >= 0) {
             return;
@@ -75,70 +64,15 @@ app.controller("startMonitorCtrl", function ($scope, $http) {
         $scope.chooseLinkArr.push(item);
     };
 
-    //删除某条链路事件
+    // //删除某条链路事件
     $scope.delCurrItem = function (item) {
-        var i = $.inArray(item, $scope.chooseLinkArr);
-        if (i < 0) {
-            return;
-        }
-        $scope.chooseLinkArr.splice(i, 1);
+		var i = $.inArray(item, $scope.chooseLinkArr) ;
+		i > 0 ? $scope.chooseLinkArr.splice(i, 1) : '';
     };
 
+    $scope.startMonitor = function(){
+    	$state.go('monitor.data.overview.list',{link:JSON.stringify($scope.chooseLinkArr),monitorParams:JSON.stringify($scope.monitorParas)});
+    }
 
-    //开始监控处理事件
-    $scope.startMonitor = function () {
-        if ($scope.chooseLinkArr.length < 1) {
-            $scope.showTips("paras", "");
-            $scope.showTips("link", "请选择监控链路");
-            return;
-        }
-        var confirmParas = $scope.confimParas($scope.monitorParas);
-        if (confirmParas.length <= 0) {
-            $scope.showTips("link", "");
-            $scope.showTips("paras", "请选择监控参数");
-            return;
-        }
-        //TODO
-        console.log(confirmParas);
-        console.log($scope.chooseLinkArr);
-    };
-
-    $scope.confimParas = function (parasObj) {
-        var confirmParas = [];
-        for (var item in parasObj) {
-            if (parasObj.hasOwnProperty(item) && parasObj[item] == true) {
-                confirmParas.push(item);
-            }
-        }
-        return confirmParas;
-    };
-
-    $scope.toggleMoreParas = function () {
-        $scope.moreParas = !$scope.moreParas;
-    };
-
-    $scope.showTips = function (type, content) {
-        var doms = $scope.tipsArr;
-        if (!doms) {
-            return;
-        }
-        switch (type) {
-            case "paras":
-                doms[1].innerHTML = content;
-                console.log(doms[1]);
-                break;
-            case "link":
-                doms[0].innerHTML = content;
-                console.log(doms[0]);
-                break;
-            default:
-                break;
-        }
-    };
-
-    $(document).ready(function () {
-        $scope.tipsArr = $(".tips");
-        $scope.getSourceNode();
-        console.log($scope.tipsArr);
-    });
+    $scope.getSourceNode();
 });

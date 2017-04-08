@@ -1,10 +1,8 @@
 "use strict";
-app.controller('monitorCtrl', function($rootScope,$scope,$http){
-	$scope.conf = {};
-	$scope.conf.link = [
-		{'src':'openflow:3:1','dest':'openflow:1:2'}
-	];
-	
+app.controller('monitorCtrl', function($rootScope,$scope,$http,$stateParams){
+	$scope.monitorLink = JSON.parse($stateParams.link);
+	$scope.monitorParams = JSON.parse($stateParams.monitorParams);
+	$scope.timeconf = 5000;
 	$scope.getAllNode = function(){
 		$http({
 			method:'GET',
@@ -34,17 +32,39 @@ app.controller('monitorCtrl', function($rootScope,$scope,$http){
 	}
 	/******找到所有链路的节点信息******/
 	$scope.findLinkInfo = function(){
-		var link = [];
-		$scope.conf.link.map(function(_item,_i){
-			let src = $scope.findNodeInfo(_item.src);
-			let dest = $scope.findNodeInfo(_item.dest);
-			link.push({src:_item.src,dest:_item.dest,src_bytes:src.bytes,src_packets:src.packets,dest_bytes:dest.bytes,dest_packets:dest.packets});
+		var linkInfo = [];
+		$scope.monitorLink.map(function(_item,_i){
+			let link = _item.split(' '); 
+			let src = $scope.findNodeInfo(link[0]);
+			let dest = $scope.findNodeInfo(link[1]);
+			linkInfo.push({src:_item.src,dest:_item.dest,src_bytes:src.bytes,src_packets:src.packets,dest_bytes:dest.bytes,dest_packets:dest.packets});
 		})
-		return link;
+		return linkInfo;
 	}
-	/****计算链路速率***/
-	$scope.linkRate = function(){
+	$scope.bytes={
+             figBytes:function(portid,data1){
+               var bytes=0;
+                for (var i=0; i<data1.length;  i++){
+                var tmp=data1[i];
+                var port_arr=tmp['node-connector'];
+                for(var j=0; j<port_arr.length;j++){
+                  var portId=port_arr[j].id;
+                if(portId==portid){
+                  var tx_bytes=port_arr[j]['opendaylight-port-statistics:flow-capable-node-connector-statistics']['bytes']['transmitted'];
+                  var rx_bytes=port_arr[j]['opendaylight-port-statistics:flow-capable-node-connector-statistics']['bytes']['received'];
+                   bytes=tx_bytes+rx_bytes;
+                }
 
+                }
+              }
+              return bytes;
+             },//end figBytes  
+           };//end bytes
+	/****计算链路速率***/
+	$scope.linkRate = function(linkPre,linkCur){
+		var tx_bytes=port_arr[j]['opendaylight-port-statistics:flow-capable-node-connector-statistics']['bytes']['transmitted'];
+        var rx_bytes=port_arr[j]['opendaylight-port-statistics:flow-capable-node-connector-statistics']['bytes']['received'];
+        bytes=tx_bytes+rx_bytes;
 	}
 	/****计算丢包率***/
 	$scope.lossPacketsRate = function(){

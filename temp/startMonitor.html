@@ -1,21 +1,22 @@
-<div class="set-wrapper" ng-controller="startMonitorCtrl">
+<form name="monitorConf">
+    <div class="set-wrapper" ng-controller="startMonitorCtrl">
     <h1 class="set-page-title">监控配置选项</h1>
     <div>
-        <h1 class="title">选择链路<span class="tips" id="link-tips"></span></h1>
+        <h1 class="title">选择链路<span class="tips" ng-if="!chooseLinkArr.length">{{linktips}}</span></h1>
         <div class="flex link-wrapper">
             <div class="flex column flex-1">
                 <div class="line">
-                    <input type="radio" id="single" value="single" name="linkBtn" ng-model="linkType"/>
+                    <input type="radio" id="single" value="single" name="linkBtn" ng-checked="true" ng-model="linkType"/>
                     <label for="single">单/多链路选择</label>
                 </div>
                 <div class="line flex node-line">
                     <span>源节点</span>
-                    <select ng-model="sourceData" ng-options="x for (x,y) in topologyData">
+                    <select name="source" ng-model="sourceData" ng-options="x for (x,y) in topologyData" required>
                     </select>
                 </div>
                 <div class="line flex node-line">
                     <span>目的节点</span>
-                    <select ng-model="desValue" ng-options="i for i in sourceData.second">
+                    <select name="dest" ng-model="desValue" ng-options="i for i in sourceData.second" required>
                     </select>
                 </div>
                 <div class="line">
@@ -23,7 +24,7 @@
                     <label for="all">所有链路</label>
                 </div>
                 <div class="line">
-                    <button ng-click="confirmLink()">确定</button>
+                    <button ng-disabled="monitorConf.source.$invalid || monitorConf.dest.$invalid" ng-click="confirmLink()">确定</button>
                 </div>
             </div>
             <div class="flex-1">
@@ -43,40 +44,39 @@
         </div>
     </div>
     <div>
-        <h1 class="title">选择监控选项（可多选）<span class="tips" id="paras-tips"></span></h1>
+        <h1 class="title">选择监控选项（可多选）<span ng-if="!(monitorParas.speed || monitorParas.loss || monitorParas.delay)" class="tips">{{tips}}</span></h1>
         <div>
             <div class="line">
-                <input id="speedPara" type="checkbox" ng-model="monitorParas.speed" ng-true-value="true"
-                       ng-false-value="false"/>
+                <input name="speedPara" type="checkbox" ng-model="monitorParas.speed" />
                 <label for="speedPara">链路速率</label>
-                <input id="lossPara" type="checkbox" ng-model="monitorParas.loss" ng-true-value="true"
-                       ng-false-value="false"/>
+                <input name="lossPara" type="checkbox" ng-model="monitorParas.loss" />
                 <label for="lossPara">丢包率</label>
-                <input id="delayPara" type="checkbox" ng-model="monitorParas.delay" ng-true-value="true"
-                       ng-false-value="false"/>
-                <label for="delayPara">延迟</label>
+                <input name="delayPara" type="checkbox" ng-model="monitorParas.delay" />
+                <label for="delayPara" >延迟</label>
             </div>
             <div class="line">
                 <div class="moreParasBtn flex" ng-hide="moreParas">
-                    <button id="openBtn" ng-click="toggleMoreParas()"></button>
+                    <button id="openBtn" ng-click="moreParas = !moreParas"></button>
                     <label for="openBtn">展开</label>
                 </div>
                 <div class="moreParasBtn flex" ng-hide="!moreParas">
-                    <button id="closeBtn" ng-click="toggleMoreParas()"></button>
+                    <button id="closeBtn" ng-click="moreParas = !moreParas"></button>
                     <label for="closeBtn">收起</label>
                 </div>
             </div>
             <div class="line" ng-show="moreParas">
-                <input id="par1Para" type="checkbox" ng-model="monitorParas.par1"/>
+                <input type="checkbox" ng-model="monitorParas.par1" />
                 <label for="par1Para">参数1</label>
-                <input id="par2Para" type="checkbox" ng-model="monitorParas.par2"/>
+                <input type="checkbox" ng-model="monitorParas.par2"/>
                 <label for="par2Para">参数2</label>
-                <input id="par3Para" type="checkbox" ng-model="monitorParas.par3"/>
+                <input type="checkbox" ng-model="monitorParas.par3"/>
                 <label for="par3Para">参数3</label>
             </div>
         </div>
     </div>
     <div class="line start-monitor">
-        <button ng-click="startMonitor()">开始</button>
+        <button ng-disabled="!(monitorParas.speed || monitorParas.loss || monitorParas.delay) || chooseLinkArr.length == 0" ng-click="startMonitor()">开始</button>
     </div>
+    <!-- ui-sref="monitor.data.overview.list"  -->
 </div>
+</form>
