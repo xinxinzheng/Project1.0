@@ -52,7 +52,6 @@ html,body{
 	margin: 20px auto 50px auto ;
 }
 .monitor .monitor-tag ul{
-	width:100%;
 	padding:0px 20px;
 }
 .monitor ul li{
@@ -80,6 +79,29 @@ html,body{
 	background: rgba(218,226,228,1);
 }
 /******监控 Tab结束*******/
+/***数据列表****/
+.datalist table{
+    width:80%;
+    margin:auto;
+    border:1px solid #f0f0f0;
+    border-spacing: separate;
+    border-collapse: collapse;
+}
+.datalist table thead{
+    line-height: 50px;
+    background: rgba(207,215,217,1);
+}
+.datalist table tbody tr{
+    line-height: 50px;
+    text-align: center;
+}
+.datalist table tbody tr:nth-child(odd){
+    background: rgba(240,248,250,1);
+}
+.datalist table tbody tr:nth-child(even){
+    background: rgba(229,237,239,1);
+}
+/****数据列表结束**/
 /******折线图******/
 .chartslist{
 	width:80%;

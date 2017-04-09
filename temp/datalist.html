@@ -2,17 +2,17 @@
 	<table>
 		<thead>
 			<tr>
-				<th></th>
-				<th ng-if="monitorParams.speed">链路速率（Mbps）</th>
-				<th ng-if="monitorParams.loss">链丢包率（%）</th>
+				<th style="width:25%">链路名称</th>
+				<th ng-if="monitorParams.speed" style="width:25%">链路速率（Mbps）</th>
+				<th ng-if="monitorParams.loss" style="width:25%">链丢包率（%）</th>
 				<th ng-if="monitorParams.delay">延迟（s）</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="items in linkInfo">
 				<td>{{items.link_id}}</td>
-				<td ng-if="monitorParams.speed">{{items.link_rate}}</td>
-				<td ng-if="monitorParams.loss">{{items.loss}}</td>
+				<td ng-if="monitorParams.speed">{{items.link_rate}} Mb</td>
+				<td ng-if="monitorParams.loss">{{items.link_loss}}%</td>
 				<td ng-if="monitorParams.delay">{{items.timeout}}</td>
 			</tr>
 		</tbody>

@@ -12,7 +12,7 @@ app.controller("startMonitorCtrl", function ($scope, $http, $state) {
     $scope.getSourceNode = function () {
         $http({
             method: "GET",
-            url: "../../data/topology.json"
+            url: "data/topology.json"
         }).success(function (res) {
             if (!res["network-topology"].topology[0].link) {
                 $scope.linktips = "没有链路信息，请确保数据正常";
@@ -83,6 +83,7 @@ app.controller("startMonitorCtrl", function ($scope, $http, $state) {
     };
 
     $scope.startMonitor = function () {
+        localStorage.allLinkInfo = "";
         $state.go('monitor.data.overview.list', {
             link: JSON.stringify($scope.chooseLinkArr),
             monitorParams: JSON.stringify($scope.monitorParas)

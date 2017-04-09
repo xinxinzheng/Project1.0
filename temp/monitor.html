@@ -2,10 +2,10 @@
 	<div class="monitor-tag">
 		<ul>
 			<li ng-class="{active:$state.includes('monitor.data.overview.list')}">
-				<a ui-sref="monitor.data.overview.list">列表显示</a>
+				<a ng-click="showList()">列表显示</a>
 			</li>
 			<li ng-class="{active:$state.includes('monitor.data.overview.charts')}">
-				<a ui-sref="monitor.data.overview.charts">图形化显示</a>
+				<a ng-click="showCharts()">图形化显示</a>
 			</li>
 		</ul>
 	</div>

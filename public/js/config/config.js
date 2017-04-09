@@ -39,7 +39,7 @@
         templateUrl: 'monitor.html',
     })
     .state('monitor.data.overview.charts', {
-            url: '/charts',
+            url: '/charts/:link/:monitorParams',
             templateUrl: 'datacharts.html',
     })
     .state('monitor.data.overview.list', {

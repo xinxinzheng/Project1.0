@@ -31,15 +31,15 @@
         watch: {
             js: {
                 files: ['public/js/*/*.js','Gruntfile.js'],
-                tasks: ['concat:js'],
+                tasks: ['concat:js','copy'],
             },
             html: {
                 files: ['temp/*.html'],
-                tasks:['concat:js']
+                tasks:['copy']
             },
             css:{
                 files:['public/stylesheet/*.css'],
-                // tasks:['csslint']
+                tasks:['copy']
             }
         },
         copy: {
@@ -62,7 +62,7 @@
             dev: {
                 options: {
                     port: 8081,
-                    base: ['public','temp']
+                    base: ['public','temp','test']
                 }
             },
         },
@@ -73,7 +73,8 @@
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.registerTask('default',['connect','concat','watch']);
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.registerTask('default',['connect','concat','copy','watch']);
 
     
   };

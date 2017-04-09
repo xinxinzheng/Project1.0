@@ -5,7 +5,7 @@
  * @version $Id$
  */
 "use strict";
-app.controller('chartlinkCtrl', function($rootScope, $scope) {
+app.controller('chartllossCtrl', function($rootScope, $scope) {
 	$scope.showCount = 20 ;
     $scope.produceCharts = function() {
         var charts = [] , data = [] , name = '' , length = $scope.allLinkInfo.length;
@@ -29,7 +29,7 @@ app.controller('chartlinkCtrl', function($rootScope, $scope) {
            _item.map(function(row,_j){
            		name = row.link_id ;
            		data[name] = data[name] ? data[name] : [];
-           		data[name].push({ x: row.time , y: parseInt(row.link_rate) });	          		
+           		data[name].push({ x: row.time , y: parseInt(row.link_loss) });	          		
            })
         });
         for(var key in data){
@@ -44,7 +44,7 @@ app.controller('chartlinkCtrl', function($rootScope, $scope) {
                 useUTC: false
             }
         });
-        $('#charts-link').highcharts({
+        $('#charts-loss').highcharts({
             chart: {
                 type: 'spline',
                 animation: true,
@@ -56,7 +56,7 @@ app.controller('chartlinkCtrl', function($rootScope, $scope) {
                     		var newData = newValue[newValue.length-1];
                     		series.map(function(_item, _i) {         			
                     			newData.map(function(row,_j){      
-                    				row.link_id == _item.name ? _item.addPoint([row.time, parseInt(row.link_rate)], true, true) : '';
+                    				row.link_id == _item.name ? _item.addPoint([row.time, parseInt(row.link_loss)], true, true) : '';
                     			});	                            
                         	})
                     	},true)                       
@@ -66,7 +66,7 @@ app.controller('chartlinkCtrl', function($rootScope, $scope) {
 
             },
             title: {
-                text: '链路实时速率--' + $scope.timeIntval/1000  + '秒'
+                text: '链路实时丢包率--' + $scope.timeIntval/1000  + '秒'
             },
             xAxis: {
                 type: 'datetime',
@@ -74,7 +74,7 @@ app.controller('chartlinkCtrl', function($rootScope, $scope) {
             },
             yAxis: {
                 title: {
-                    text: '速率'
+                    text: '丢包率'
                 },
                 plotLines: [{
                     value: 0,
@@ -85,8 +85,8 @@ app.controller('chartlinkCtrl', function($rootScope, $scope) {
             tooltip: {
                 formatter: function() {
                     return '<b> 链路：' + this.series.name + '</b><br/>时间：' +
-                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>速率：' +
-                        Highcharts.numberFormat(this.y, 2) + 'Mbps';
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>丢包率：' +
+                        Highcharts.numberFormat(this.y, 2) + '%';
                 }
             },
             legend: {
