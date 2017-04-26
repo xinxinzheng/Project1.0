@@ -1,0 +1,13 @@
+<div class="monitor" ng-controller="monitorCtrl">
+	<div class="monitor-tag">
+		<ul>
+			<li ng-class="{active:$state.includes('monitor.data.overview.list')}">
+				<a ng-click="showList()">列表显示</a>
+			</li>
+			<li ng-class="{active:$state.includes('monitor.data.overview.charts')}">
+				<a ng-click="showCharts()">图形化显示</a>
+			</li>
+		</ul>
+	</div>
+	<div ui-view></div>
+</div>

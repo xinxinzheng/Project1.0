@@ -17,7 +17,7 @@
                     </div>
                     <div class="line flex node-line">
                         <span>目的节点</span>
-                        <select name="dest" ng-model="desValue" ng-options="i.end.node for i in sourceData" required>
+                        <select name="dest" ng-model="desValue" ng-options="i.node for i in sourceData.end" required>
                         </select>
                     </div>
                     <div class="line">
@@ -36,7 +36,7 @@
                     </div>
                     <ul class="select-link">
                         <li ng-repeat="item in chooseLinkArr">
-                            <span>{{$index+1 + ". "+item.from.node + " "+item.end.node}}</span>
+                            <span>{{$index+1 + ". "+item.source.node + " "+item.des.node}}</span>
                             <button ng-click="delCurrItem(item)"></button>
                         </li>
                     </ul>

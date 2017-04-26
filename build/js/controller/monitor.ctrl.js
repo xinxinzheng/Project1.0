@@ -51,7 +51,7 @@ app.controller('monitorCtrl', function($rootScope,$scope,$http,$stateParams,$sta
 		var node = {name:nodeName};
 		$scope.nodes.map(function(_item,_i){
 			if(nodeName.indexOf(_item.id) != -1){
-				let connect ;
+				var connect ;
 				connect = _item['node-connector'];
 				$.map(connect,function(row,_j){
 					row.id == nodeName ? node.bytes = row['opendaylight-port-statistics:flow-capable-node-connector-statistics'].bytes : '';
@@ -66,11 +66,11 @@ app.controller('monitorCtrl', function($rootScope,$scope,$http,$stateParams,$sta
 	$scope.findLinkInfo = function(){
 		var linkInfo = [];
 		$scope.monitorLink.map(function(_item,_i){
-			let src = $scope.findNodeInfo(_item.from.tp);
-			let dest = $scope.findNodeInfo(_item.end.tp);
+			var src = $scope.findNodeInfo(_item.source.tp);
+			var dest = $scope.findNodeInfo(_item.des.tp);
 			linkInfo.push({
-				src:_item.from.tp,
-				dest:_item.end.tp,
+				src:_item.source.tp,
+				dest:_item.des.tp,
 				src_bytes:src.bytes,
 				src_packets:src.packets,
 				dest_bytes:dest.bytes,
@@ -82,24 +82,28 @@ app.controller('monitorCtrl', function($rootScope,$scope,$http,$stateParams,$sta
 	
 	/****计算链路速率***/
 	$scope.linkRate = function(linkPre,linkCur){
-		let srcPre = linkPre.src_bytes.transmitted + linkPre.src_bytes.received;
-		let destPre = linkPre.dest_bytes.transmitted + linkPre.dest_bytes.received;
-		let srcCur = linkCur.src_bytes.transmitted + linkPre.src_bytes.received;
-		let destCur = linkCur.dest_bytes.transmitted + linkPre.dest_bytes.received;
-		let destRate = (destCur - destPre) / $scope.timeconf;
-		let srcRate = (srcCur - srcPre) / $scope.timeconf;
+		console.log(linkPre,linkCur);
+		var srcPre = linkPre.src_bytes.transmitted + linkPre.src_bytes.received;
+		var destPre = linkPre.dest_bytes.transmitted + linkPre.src_bytes.received;
+		var srcCur = linkCur.src_bytes.transmitted + linkPre.src_bytes.received;
+		var destCur = linkCur.dest_bytes.transmitted + linkPre.src_bytes.received;
+		var destRate = (destCur - destPre) / $scope.timeconf;
+		var srcRate = (srcCur - srcPre) / $scope.timeconf;
 
-		let rate = (destRate + srcRate) / 2 / 1024;
-		return rate.toFixed(2); 
+		var rate = (destRate + srcRate) / 2 / 1024;
+		var rates = rate < 0 ? 0 : rate.toFixed(2); 
+		return rates;
 	}
 	/****计算丢包率***/
 	$scope.lossPacketsRate = function(linkPre,linkCur){
-		let srcPre = linkPre.src_packets.transmitted;
-		let destPre = linkPre.dest_packets.received;
-		let srcCur = linkCur.src_packets.transmitted;
-		let destCur = linkCur.dest_packets.received;
-		let loss = (((srcCur - srcPre) - (destCur - destPre)) / (srcCur - srcPre)) * 100;
-		return loss.toFixed(2);
+		console.log(linkPre,linkCur);
+		var srcPre = linkPre.src_packets.transmitted;
+		var destPre = linkPre.dest_packets.received;
+		var srcCur = linkCur.src_packets.transmitted;
+		var destCur = linkCur.dest_packets.received;
+		var loss = (((srcCur - srcPre) - (destCur - destPre)) / (srcCur - srcPre)) * 100;
+		var lossR = loss < 0 ? 0 : loss.toFixed(2);
+		return lossR;
 	}
 	/****计算时延***/
 	$scope.linkTimeOut = function(){

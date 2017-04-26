@@ -18,7 +18,6 @@ app.controller("startMonitorCtrl", function ($scope, $http, $state) {
                 $scope.linktips = "没有链路信息，请确保数据正常";
                 return;
             }
-
             $scope.topologyData = $scope.filterData(res["network-topology"].topology[0].link);
         })
     };
@@ -37,21 +36,18 @@ app.controller("startMonitorCtrl", function ($scope, $http, $state) {
                 des_tp = des["dest-tp"] || "";
                 source_tp = source["source-tp"] || "";
                 if (!nodeArr[source_node]) {
-                    nodeArr[source_node] = [];
-                    nodeArr[source_node].push({
-                        "from":{"node": source_node, "tp": source_tp},
-                        "end":{"node": des_node, "tp": des_tp}
-                    });
+                    nodeArr[source_node] = {};
+                    nodeArr[source_node].from = {"node": source_node, "tp": source_tp};
+                    nodeArr[source_node].end = [];
+                    nodeArr[source_node].end.push({"node": des_node, "tp": des_tp});
                 } else {
-                    nodeArr[source_node].push({
-                        "from":{"node": source_node, "tp": source_tp},
-                        "end":{"node": des_node, "tp": des_tp}
-                    });
+                    if ($.inArray({"node": des_node, "tp": des_tp}, nodeArr[source_node].end) == -1) {
+                        nodeArr[source_node].end.push({"node": des_node, "tp": des_tp});
+                    }
                 }
-
                 $scope.allLinkArr.push({
-                    "from": {"node": source_node, "tp": source_tp},
-                    "end": {"node": des_node, "tp": des_tp}
+                    "source": {"node": source_node, "tp": source_tp},
+                    "des": {"node": des_node, "tp": des_tp}
                 });
             }
         });
@@ -70,11 +66,14 @@ app.controller("startMonitorCtrl", function ($scope, $http, $state) {
             $scope.chooseLinkArr = angular.copy($scope.allLinkArr);
             return;
         }
-        if ($.inArray($scope.desValue, $scope.chooseLinkArr) >= 0) {
+        var item = {
+            "source": $scope.sourceData.from,
+            "des": $scope.desValue
+        };
+        if ($.inArray(item, $scope.chooseLinkArr) >= 0) {
             return;
         }
-        $scope.chooseLinkArr.push($scope.desValue);
-
+        $scope.chooseLinkArr.push(item);
     };
 
     // //删除某条链路事件
